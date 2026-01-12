@@ -33,8 +33,19 @@ const User = sequelize.define('User', {
         allowNull: false
     },
     additionalInfo: {
-        type: DataTypes.JSON, // Or DataTypes.TEXT if JSON not supported by DB (MariaDB/older MySQL)
-        allowNull: true
+        type: DataTypes.TEXT, // Changed from JSON for compatibility with older MySQL versions
+        allowNull: true,
+        get() {
+            const rawValue = this.getDataValue('additionalInfo');
+            try {
+                return rawValue ? JSON.parse(rawValue) : null;
+            } catch (e) {
+                return rawValue;
+            }
+        },
+        set(value) {
+            this.setDataValue('additionalInfo', JSON.stringify(value));
+        }
     }
 }, {
     hooks: {

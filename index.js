@@ -10,8 +10,10 @@ async function startServer() {
     await sequelize.authenticate();
     console.log('Database connected successfully.');
 
-    // Sync models (use { force: true } only for development to reset)
-    await sequelize.sync({ alter: true });
+    // Sync models
+    // process.env.DB_FORCE_RESET can be used to drop tables (careful!)
+    const syncOptions = process.env.DB_FORCE_RESET === 'true' ? { force: true } : {};
+    await sequelize.sync(syncOptions);
     console.log('Database synced.');
 
     app.listen(PORT, () => {
