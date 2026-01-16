@@ -48,6 +48,10 @@ const User = sequelize.define('User', {
         }
     }
 }, {
+    tableName: 'users', // Explicitly set table name to match foreign key references
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     hooks: {
         beforeCreate: async (user) => {
             if (user.password) {

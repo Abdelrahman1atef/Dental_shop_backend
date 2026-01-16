@@ -16,11 +16,17 @@ app.get('/', (req, res) => {
     res.send('Dental Shop API is running');
 });
 
-// Routes (to be added)
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+// Routes
+const authRoutes = require('./modules/auth/auth.routes');
+const patientsRoutes = require('./modules/patients/patients.routes');
+const appointmentsRoutes = require('./modules/appointments/appointments.routes');
+const medicalRecordsRoutes = require('./modules/medical-records/medical-records.routes');
+// const userRoutes = require('./modules/users/users.routes'); // To be implemented
 
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/patients', patientsRoutes);
+app.use('/api/appointments', appointmentsRoutes);
+app.use('/api/medical-records', medicalRecordsRoutes);
+// app.use('/users', userRoutes);
 
 module.exports = app;

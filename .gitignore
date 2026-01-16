@@ -2,3 +2,5 @@
 /dental_shop_api.postman_collection.json
 /node_modules
 /verify_backend.js
+.vercel
+.env*.local
